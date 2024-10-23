@@ -14,7 +14,8 @@
 
 ## Features
 - Accessible via Windows Tray
-- Stores state
+- Stores state in a text file
+- Autocomplete and error handling
 - Simple notes support. (If a day label starte with "# Note", then it will be ignored)
 
 ## How to use
