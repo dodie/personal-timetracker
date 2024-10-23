@@ -1,7 +1,7 @@
 # Text-based personal time tracker
 
 ## Usage
-- Days can be added as "# <day>
+- Days can be added as `# <day>`
 - Time records can be added as `hh:mm-hh:mm label`
 - Automatically aggregates time spent by topic for each day. After summing up entries it ensures that sums can be represented by a decimal number in the format of `n.nn`, so it may round upwards a few minutes for each label.
 - Automatically generates presence time. (Limitation: currently start is fixed at 8:00 and lunch break is at 12:00-13:00, end time calculated by the items.)
