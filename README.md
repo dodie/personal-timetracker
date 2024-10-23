@@ -33,12 +33,10 @@
 - Make error handling more lenient, to be able to see the total time in case of errors 
 - Add guide how to add the shortcut to autostart and hide the console window.
 - Application lock to prevent multiple instances running concurrently.
-- Autocomplete should whole labels not just words
-
-- Add flags to control behavior
+- Autocomplete should suggest whole labels not just individual words
+- Add config options to control behavior
   - Be able to turn off rounding
-  - Configure presence time generator instead of the fixed lunch break 12:00-13:00
-
+  - Configure presence time generator instead of always using the fixed lunch break 12:00-13:00
 - Visualize each day with a simple chart as an overall presence time indicator for the day. 
 - Add more formatting 
   - Have a different background for # Note: sections
