@@ -1,7 +1,7 @@
 # Text-based personal time tracker
 
 ## Usage
-- Open/Close via the clock button added to Windows tray.
+- Open/Close application via the clock button added to Windows tray.
 - Manage time entries as simple text
   - Days can be added as `# <day>`
   - Time records can be added as `hh:mm-hh:mm label`
