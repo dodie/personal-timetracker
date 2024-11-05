@@ -19,6 +19,7 @@
 - Simple notes support. (If a day label starte with "# Note", then it will be ignored)
 
 ## How to use
+0. Requires Python 3.12.7 and PowerShell.
 1. Clone this repo
 2. As a one-time setup, run `install.ps1` to create the virtual environment
 3. Run `gui.ps1`
