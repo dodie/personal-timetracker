@@ -1,13 +1,14 @@
 # Text-based personal time tracker
 
 ## How to use
-- Open/Close application via the clock button added to Windows tray
-- Manage time entries as simple text. State is automatically stored in a local text file
+- Show/hide the time tracker window via the clock button on the Windows tray
+- Manage time entries as simple text
   - Days can be added as `# <day>`
   - Time records can be added as `hh:mm-hh:mm label`
 - Get real-time aggregations automatically
   - Time spent by topic for each day. After summing up entries it ensures that sums can be represented by a decimal number in the format of `n.nn`, so it may round upwards a few minutes for each label
   - Presence time (Limitation: currently start is fixed at 8:00 and lunch break is at 12:00-13:00, end time calculated by the items.)
+- State is automatically stored in a local text file
 - Supports simple notes: if a day label starts with "# Note" then it will be not considered for the aggregations
 
 ![Time tracker](demo.png)
