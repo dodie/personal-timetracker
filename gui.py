@@ -96,7 +96,7 @@ def parse_sections(input_string):
 
 is_left_text_area_visible = True
 
-def add_missing_header_for_current_day():
+def add_missing_header_for_current_day_and_start_time():
     """
     # insert new header with current date at startup if it's not already there
     """
@@ -106,7 +106,7 @@ def add_missing_header_for_current_day():
         left_text_area.insert(tk.END, "\n")
         left_text_area.insert(tk.END, day_header)
         left_text_area.insert(tk.END, "\n")
-        left_text_area.insert(tk.END, now.strftime("%H:%M-??:?? <started>"))
+    left_text_area.insert(tk.END, now.strftime("%H:%M-??:?? <started>"))
 
 def main():
     global window
@@ -159,7 +159,7 @@ def main():
     with open('~save.txt', 'r') as file:
       left_text_area.insert(tk.INSERT, file.read())
 
-    add_missing_header_for_current_day()
+    add_missing_header_for_current_day_and_start_time()
 
     TextEditingBasics(left_text_area).enable()
     TextEditingBasics(right_text_area).enable()
