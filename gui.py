@@ -161,8 +161,8 @@ def main():
 
     add_missing_header_for_current_day_and_start_time()
 
-    TextEditingBasics(left_text_area).enable()
-    TextEditingBasics(right_text_area).enable()
+    TextEditingBasics(left_text_area, "left_text_area").enable()
+    TextEditingBasics(right_text_area, "right_text_area").enable()
 
     Autocomplete(left_text_area).enable()
 

@@ -1,15 +1,46 @@
 import tkinter as tk
 import tkinter.font as tkFont
+import yaml
+import os
 
 class TextEditingBasics:
-    def __init__(self, scrolled_text):
+    def __init__(self, scrolled_text, widget_id):
         self.scrolled_text = scrolled_text
+        self.widget_id = widget_id
+        self.config_file = "config.yaml"
         self.default_font_size = 10
-        self.current_font_size = self.default_font_size
-        self.font_family = "Consolas"  # Default monospace font
+        self.font_family = "Consolas"
+        self.current_font_size = self._load_font_size()
         self._setup_font()
 
+    def _load_font_size(self):
+        try:
+            if os.path.exists(self.config_file):
+                with open(self.config_file, 'r') as file:
+                    config = yaml.safe_load(file) or {}
+                    return config.get(self.widget_id, {}).get('fontsize', self.default_font_size)
+        except Exception:
+            pass  # If any error occurs, use default
+        return self.default_font_size
+
+    def _save_font_size(self):
+        try:
+            config = {}
+            if os.path.exists(self.config_file):
+                with open(self.config_file, 'r') as file:
+                    config = yaml.safe_load(file) or {}
+            
+            if self.widget_id not in config:
+                config[self.widget_id] = {}
+            config[self.widget_id]['fontsize'] = self.current_font_size
+            
+            with open(self.config_file, 'w') as file:
+                yaml.dump(config, file, default_flow_style=False)
+        except Exception:
+            pass  # Silently fail if config can't be saved
+
     def _setup_font(self):
+        """Initialize the font for the text widget"""
         self.font = tkFont.Font(family=self.font_family, size=self.current_font_size)
         self.scrolled_text.configure(font=self.font)
 
@@ -46,11 +77,13 @@ class TextEditingBasics:
         if self.current_font_size < 24:
             self.current_font_size += 1
             self._update_font()
+            self._save_font_size()
 
     def decrease_font_size(self):
         if self.current_font_size > 6:
             self.current_font_size -= 1
             self._update_font()
+            self._save_font_size()
 
     def _update_font(self):
         self.font.configure(size=self.current_font_size)
@@ -58,6 +91,7 @@ class TextEditingBasics:
     def reset_font_size(self):
         self.current_font_size = self.default_font_size
         self._update_font()
+        self._save_font_size()
 
 def select_all(event):
     event.widget.tag_add(tk.SEL, "1.0", tk.END)
