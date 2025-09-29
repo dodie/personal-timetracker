@@ -93,6 +93,14 @@ class TextEditingBasics:
         self._update_font()
         self._save_font_size()
 
+def has_selection(widget):
+    """Check if the widget has any text selected"""
+    try:
+        widget.index(tk.SEL_FIRST)
+        return True
+    except tk.TclError:
+        return False
+
 def select_all(event):
     event.widget.tag_add(tk.SEL, "1.0", tk.END)
     event.widget.mark_set(tk.INSERT, "1.0")
@@ -122,6 +130,10 @@ def delete_previous_word(event):
     return "break"
 
 def delete_current_line(event):
+    # Return if there's a selection to allow default cut behavior
+    if has_selection(event.widget):
+        return None
+    
     insert_index = event.widget.index(tk.INSERT)
     row, col = map(int, insert_index.split('.'))
     
