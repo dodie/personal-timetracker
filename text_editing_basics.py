@@ -47,7 +47,7 @@ class TextEditingBasics:
     def enable(self):
         self.scrolled_text.bind("<Control-a>", select_all)
         self.scrolled_text.bind("<Control-BackSpace>", delete_previous_word)
-        self.scrolled_text.bind("<Control-x>", delete_current_line)
+        self.scrolled_text.bind("<Control-x>", cut_current_line)
         self.scrolled_text.bind("<Control-MouseWheel>", self._on_ctrl_mousewheel)
         self.scrolled_text.bind("<Control-Key-0>", self._on_ctrl_zero)
         self.scrolled_text.bind("<Control-plus>", self._on_ctrl_plus)
@@ -129,7 +129,7 @@ def delete_previous_word(event):
     event.widget.delete(word_start_index, insert_index)
     return "break"
 
-def delete_current_line(event):
+def cut_current_line(event):
     # Return if there's a selection to allow default cut behavior
     if has_selection(event.widget):
         return None
@@ -150,6 +150,11 @@ def delete_current_line(event):
     elif row > 1:
         # Last line but not the only line, delete including the preceding newline
         line_start = f"{row - 1}.end"
+    
+    # Copy the line content (without the trailing newline) to clipboard
+    line_content = event.widget.get(f"{row}.0", f"{row}.end")
+    event.widget.clipboard_clear()
+    event.widget.clipboard_append(line_content)
     
     event.widget.delete(line_start, line_end)
     return "break"
